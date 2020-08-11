@@ -9,7 +9,7 @@ $('#change-return-button').on('click', function() {
 
 
 });//INITIALIZE TOTALIN VARIABLE
-var resetTotalIn = 0;
+
 var totalIn = 0;
 
 $('#change-return-button').on('click', function() {
@@ -53,23 +53,19 @@ $('#add-nickel-button').on('click', function() {
 //START - CLICK "MAKE PURCHASE BUTTON"
 $('#make-purchase-button').on('click', function() {
   var currentTotal = totalIn;
-  //alert(currentTotal);
-  //var itemNumber = parseInt($('#item-output-box').val());
-  var itemNumber = $('#item-output-box').val();
-  alert("item number: " + itemNumber);
 
-  //var itemNumber = $('#item-output-box').val();
-  //alert(itemNumber);
+  var itemNumber = $('#item-output-box').val();
+
+
 
   $.ajax ({
     type: 'GET',
-    //url: 'http://localhost:8080/money/2/item/2',
+
     url: 'http://localhost:8080/money/' + currentTotal + '/item/' + itemNumber,
     success: function(data, status) {
-      alert('success');
+
       $('#Messages-output-box').val("Thank you!!!");
 
-      //$('#change-return-button').hide();
 
       var message ="";
 
@@ -98,29 +94,11 @@ $('#make-purchase-button').on('click', function() {
       },
       error: function(jqXHR, status) {
        //alert('There was an error: ' + data);
-       $('#Messages-output-box').val(jqXHR.statusText);
+       $('#Messages-output-box').val(jqXHR.responseJSON.message);
+       //$('#Messages-output-box').val(jqXHR.statusText);
        //How do I get the error message (i.,e sold out or deposit x amount from messag ebody in error)
 
       }
-      //error: function(jqXHR,textStatus, errorThrown) {
-      //alert(jqXHR);
-      //alert(textStatus);
-      //alert(errorThrown);
-      //item.message
-      //var message = item.message;
-      //i need something. message, but what??
-      //var message = xhr.status + ':' + xhr.statusText;
-      //alert(xhr.responseJSON.message);
-      //alert(currentTotal);
-      //var message = error.message;
-      //alert(error);
-      //alert(xhr.statusText); // need to get message
-
-      //$('#Messages-output-box').val(xhr.statusText);
-      //$('#errorMessages')
-        //  .append($('<li>')
-          //.attr({class: 'list-group-item list-group-item-danger'})
-          //.text('Error calling web service. Please try again later.'));
 
 
     });
@@ -187,12 +165,9 @@ $('#item-9-div').on('click', function() {
 
 })
 
-function returnZero() {
-  return 0;
-}
 
 function LoadItems() {
-  //totalIn = 0;
+
   $.ajax ({
     type: 'GET',
     url: 'http://localhost:8080/items',
@@ -222,28 +197,11 @@ function LoadItems() {
 }
 
 function clearData() {
-  //var totalIn = 0; //no zeroing out total =
-  //$('#total-in-input-box').val('$' + totalIn.toFixed(2));
+
   $('#Messages-output-box').val('');
   $('#item-output-box').val('');
   $('#change-output-box').val('');
   $('#Messages-output-box').val('');
 
 
-  //totalIn output box = 0
-  //Messages outputbox = 0
-  //Item output box = 0
-
 }
-
-
-//$('').on('click', function() {});
-
-//$('').on('click', function() {});
-
-//Added validation to add button
-//$('').on('click', function() {}); //closes jQuery code
-
-//$('').on('click', function() {}); //closes jQuery code
-
-//$('').on('click', function() {
